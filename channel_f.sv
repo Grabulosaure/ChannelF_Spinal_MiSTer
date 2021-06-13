@@ -181,33 +181,35 @@ wire clk_sys,pll_locked;
 
 wire pal    = status[10];
 
+assign CLK_VIDEO = clk_sys;
+
 chf_core chf_core
 (
+    .io_pll_locked(pll_locked),
+    .io_pal(pal),
+    .io_reset(RESET | status[0]),
+    .io_vga_ce(CE_PIXEL),
+    .io_vga_r(VGA_R),
+    .io_vga_g(VGA_G),
+    .io_vga_b(VGA_B),
+    .io_vga_hs(VGA_HS),
+    .io_vga_vs(VGA_VS),
+    .io_vga_de(VGA_DE),
+    .io_joystick_0(joystick_0),
+    .io_joystick_1(joystick_1),
+    .io_joystick_analog_0(joystick_analog_0),
+    .io_joystick_analog_1(joystick_analog_1),
+    .io_status(status),
+    .io_ioctl_download(ioctl_download),
+    .io_ioctl_index(ioctl_index),
+    .io_ioctl_wr(ioctl_wr),
+    .io_ioctl_addr(ioctl_addr),
+    .io_ioctl_dout(ioctl_dout),
+    .io_ioctl_wait(ioctl_wait),
+    .io_audio_l(AUDIO_L),
+    .io_audio_r(AUDIO_R),
     .clk(clk_sys),
-    .pll_locked(pll_locked),
-    .pal(pal),
-    .reset(RESET | status[0]),
-    .vga_clk(CLK_VIDEO),
-    .vga_ce(CE_PIXEL),
-    .vga_r(VGA_R),
-    .vga_g(VGA_G),
-    .vga_b(VGA_B),
-    .vga_hs(VGA_HS),
-    .vga_vs(VGA_VS),
-    .vga_de(VGA_DE),
-    .joystick_0(joystick_0),
-    .joystick_1(joystick_1),
-    .joystick_analog_0(joystick_analog_0),
-    .joystick_analog_1(joystick_analog_1),
-    .status(status),
-    .ioctl_download(ioctl_download),
-    .ioctl_index(ioctl_index),
-    .ioctl_wr(ioctl_wr),
-    .ioctl_addr(ioctl_addr),
-    .ioctl_dout(ioctl_dout),
-    .ioctl_wait(ioctl_wait),
-    .audio_l(AUDIO_L),
-    .audio_r(AUDIO_R)
+    .reset(0)
 );
 
 pll pll
